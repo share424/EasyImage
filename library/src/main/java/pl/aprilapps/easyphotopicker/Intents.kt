@@ -3,6 +3,8 @@ package pl.aprilapps.easyphotopicker
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -38,6 +40,8 @@ internal object Intents {
     internal fun createGalleryIntent(allowMultiple: Boolean): Intent {
         val intent = plainGalleryPickerIntent()
         if (Build.VERSION.SDK_INT >= 18) intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, allowMultiple)
+        intent.addFlags(FLAG_GRANT_READ_URI_PERMISSION)
+        intent.addFlags(FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
         return intent
     }
 

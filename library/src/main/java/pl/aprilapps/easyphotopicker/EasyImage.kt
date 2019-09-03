@@ -6,7 +6,10 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.fragment.app.Fragment
+import io.reactivex.Observable
+import rx_activity_result2.RxActivityResult
 import java.io.IOException
+import rx_activity_result2.Result
 
 
 class EasyImage private constructor(
@@ -64,7 +67,8 @@ class EasyImage private constructor(
 
     private fun startGallery(caller: Any) {
         cleanup()
-        getCallerActivity(caller)?.let { activity ->
+        val act = getCallerActivity(caller)
+        act?.let { activity ->
             val intent = Intents.createGalleryIntent(allowMultiple)
             activity.startActivityForResult(intent, RequestCodes.PICK_PICTURE_FROM_GALLERY)
         }

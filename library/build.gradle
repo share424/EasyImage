@@ -5,6 +5,12 @@ apply plugin: 'maven-publish'
 
 def artifactId = 'EasyImageLegacy'
 def groupId = 'com.github.jkwiecien'
+def version_name = '3.0.0'
+def kotlin_version = '1.3.21'
+def compile_sdk_version = 28
+def target_sdk_version = 28
+def min_sdk_version = 15
+def version_code = 12
 
 publishing {
     publications {
@@ -12,7 +18,6 @@ publishing {
             setGroupId(groupId)
             setArtifactId(artifactId)
             version version_name
-            artifact(bundleReleaseAar)
         }
     }
 }
@@ -38,8 +43,13 @@ android {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation project(':rxactivityresult')
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
 }
 repositories {
     mavenCentral()
+    jcenter()
+    maven { url "https://jitpack.io" }
 }
 
